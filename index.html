@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+    <title>Простое приложение для учета расходов</title>
+    <?!= include('Stylesheet'); ?>
+    <script>
+        // Функция для добавления нового расхода
+        function addExpense() {
+            var dateInput = document.getElementById("dateInput");
+            var categorySelect = document.getElementById("categorySelect");
+            var amountInput = document.getElementById("amountInput");
+
+            var date = dateInput.value.trim();
+            var category = categorySelect.value.trim();
+            var amount = parseFloat(amountInput.value.trim());
+
+            if (date !== "" && category !== "" && !isNaN(amount)) {
+                var expenseList = document.getElementById("expenseList");
+                var listItem = document.createElement("li");
+                listItem.textContent = date + ' - ' + category + ' - ' + amount + ' руб.';
+                expenseList.appendChild(listItem);
+                dateInput.value = "";
+                categorySelect.selectedIndex = 0;
+                amountInput.value = "";
+            } else {
+                alert("Введите корректные данные для расхода!");
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Мое приложение для учета расходов</h1>
+<div>
+    <input type="date" id="dateInput">
+    <select id="categorySelect">
+        <option value="Продукты">Продукты</option>
+        <option value="Транспорт">Транспорт</option>
+        <option value="Жилье">Жилье</option>
+        <option value="Развлечения">Развлечения</option>
+    </select>
+    <input type="number" id="amountInput" placeholder="Сумма">
+    <button onclick="addExpense()">Добавить расход</button>
+</div>
+<ul id="expenseList">
+    <!-- Здесь будут отображаться расходы -->
+</ul>
+</body>
+</html>
